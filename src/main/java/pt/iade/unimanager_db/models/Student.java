@@ -41,6 +41,7 @@ public class Student {
 
   @ManyToOne
   @JoinColumn(name = "alu_cur_id")
+  @JsonIgnoreProperties("plans")
   private Course course;
 
   @OneToMany

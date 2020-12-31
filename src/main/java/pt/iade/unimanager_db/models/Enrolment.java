@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -16,18 +15,14 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import pt.iade.unimanager_db.models.ids.EnrolmentId;
-
 @Entity
 @Table(name = "inscricoes")
-@IdClass(EnrolmentId.class)
 public class Enrolment {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "ins_id")
   private int id;
 
-  @Id
   @Column(name = "ins_alu_id")
   @JsonIgnore
   private int studentId;
@@ -35,10 +30,9 @@ public class Enrolment {
   @ManyToOne
   @MapsId("studentId")
   @JoinColumn(name = "ins_alu_id")
-  @JsonIgnoreProperties("enrolments")
+  @JsonIgnoreProperties({ "enrolments", "course" })
   private Student student;
 
-  @Id
   @Column(name = "ins_pla_cur_id")
   @JsonIgnore
   private int courseId;
@@ -49,7 +43,6 @@ public class Enrolment {
   @JsonIgnoreProperties("plans")
   private Course course;
 
-  @Id
   @Column(name = "ins_pla_dis_id")
   @JsonIgnore
   private int unitId;

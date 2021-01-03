@@ -16,7 +16,7 @@ window.onload = async function () {
     let html = "";
 
     for (let plan of course.plans) {
-      html += `<section onclick="showUnit(${plan.unit.id})">
+      html += `<section class="btn" onclick="showUnit(${plan.unit.id})">
         <section class="sem">${plan.semester} Sem</section>
         <section class="cre">Credits ${plan.unit.credits}</section>
         <h3 class="name">${plan.unit.name}</h3>
@@ -32,4 +32,5 @@ window.onload = async function () {
 
 function showUnit(id) {
   sessionStorage.setItem("unitId", id);
+  window.location = "unit.html";
 }
